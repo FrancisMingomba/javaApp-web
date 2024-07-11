@@ -1,9 +1,9 @@
 import http from "./httpService";
 import config from '../config.json';
 
-const userEndpoint = config.apiEndpoint + "/users";
+const userEndpoint = config.apiEndpoint + "/register";
 
-export function register(user) {
+export function signup(user) {
     // console.log(userEndpoint);
    return  http.post(userEndpoint, {
         name: user.name,
@@ -11,3 +11,4 @@ export function register(user) {
         password: user.password
     });
 }
+

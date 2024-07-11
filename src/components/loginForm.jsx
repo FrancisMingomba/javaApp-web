@@ -1,10 +1,13 @@
 import React  from 'react';
+//import  useNavigate  from 'react-router-dom';
+//import  withNavigateHook  from '../withNavigateHook';
 import Joi from 'joi-browser';
 import Form from './form';
 import { login } from '../services/authService';
 
 
-class RegisterForm extends Form{
+
+class LoginForm extends Form{
     state = { 
         data: {username: "", password: ""},
         errors: {}
@@ -19,7 +22,13 @@ class RegisterForm extends Form{
      doSubmit = async () =>{
         try {
             const { data } = this.state;
-            await login(data.username, data.password);
+            const  {data: jwt}  = await login(data.username, data.password);
+            localStorage.setItem( "token",JSON.stringify (jwt));
+           // window.location = "/logout";
+            window.location = "/francis";
+           
+       
+
         } catch (ex) {
             if (ex.response && ex.response.status === 400) {
                 const errors = {...this.state.errors};
@@ -43,4 +52,5 @@ class RegisterForm extends Form{
     }
 }
  
-export default  RegisterForm;
+export default  LoginForm;
+
